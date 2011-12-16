@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Batch alias creator/updater
+# 20111104
+#
+# Create aliases from a space/tab separated list. {domain} {alias} {alias,alias,alias}
+# The script will generate aliases for exim to read. Just provide the aliases separated by space or tabs. Copy paste from a regular spreadsheet should work.
+#
+# It will check for duplicates too and update the duplicated email. Also, it will add the domains to localdomain list.
+#
+# License: GPLv3 or >
+
+virtual_dir='/etc/virtual'
+
+while read domain alias emails; do 
+    if [[ ! -d ${virtual_dir}/${domain} ]]; then
+        echo "creando directorio para: ${domain}"
+        mkdir ${virtual_dir}/${domain}
+    fi
+
+    if ( ! grep -qs "${domain}" /etc/localdomains ); then
+        echo "${domain}" >> /etc/localdomains
+    fi
+
+    if ( grep -qs ${alias} ${virtual_dir}/${domain}/aliases ); then
+        echo "borrando duplicado: $alias"
+        sed -i "/^${alias}/d" ${virtual_dir}/${domain}/aliases
+    fi
+    
+    echo "agregando $alias a $domain en $virtual_dir"
+    echo ${alias}: ${emails} >> ${virtual_dir}/${domain}/aliases
+    chown root.mail ${virtual_dir}/${domain}/aliases
+    chmod 644 ${virtual_dir}/${domain}/aliases
+
+done < <( cat $1 )
+
+exit 0

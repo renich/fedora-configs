@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# Batch user creator/updater
+# 20111008
+#
+# Create amils from a space/tab separated list. {domain} {email} {plain-text-password}
+# The script will generate emails for dovecot to read. Just provide the emails separated by space or tabs. Copy paste from a regular spreadsheet should work.
+#
+# It will check for duplicates too and update the duplicated email.
+#
+# License: GPLv3 or >
+
+virtual_dir='/etc/virtual'
+
+while read domain email password; do 
+    hash=$( printf "%s\n" $password $password | doveadm pw -s ssha512.b64 )
+
+    if [[ ! -d ${virtual_dir}/${domain} ]]; then
+        echo "creando directorio para: ${domain}"
+        mkdir ${virtual_dir}/${domain}
+    fi
+
+    if ( ! grep -qs "${domain}" /etc/localdomains ); then
+        echo "${domain}" >> /etc/localdomains
+    fi
+
+    if ( grep -qs ${email} ${virtual_dir}/${domain}/passwd ); then
+        echo "borrando duplicado: $email"
+        sed -i "/^${email}/d" ${virtual_dir}/${domain}/passwd
+    fi
+    
+    echo "agregando $email to $domain at $virtual_dir"
+    echo ${email}:${hash} >> ${virtual_dir}/${domain}/passwd
+    chown root.dovecot ${virtual_dir}/${domain}/passwd
+    chmod 640 ${virtual_dir}/${domain}/passwd
+
+    echo "creando archivo de alias para ${domain}..."
+    touch ${virtual_dir}/${domain}/aliases
+    chown root.mail ${virtual_dir}/${domain}/aliases
+    chmod 644 ${virtual_dir}/${domain}/aliases
+
+done < <( cat $1 )
+
+exit 0
