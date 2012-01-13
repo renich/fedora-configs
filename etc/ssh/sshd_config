@@ -5,6 +5,9 @@
 # Log
 SyslogFacility AUTHPRIV
 
+# Disable DNS
+UseDNS no
+
 # Auth
 ChallengeResponseAuthentication no
 PasswordAuthentication yes
