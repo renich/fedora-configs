@@ -26,6 +26,7 @@ X11Forwarding no
 Subsystem   sftp    /usr/libexec/openssh/sftp-server
 
 AllowUsers renich root
+PermitRootLogin without-password
 
 Match User renich
 PubkeyAuthentication yes
