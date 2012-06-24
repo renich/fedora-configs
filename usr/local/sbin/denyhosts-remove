@@ -1,29 +1,32 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-base_path="/var/lib/denyhosts"
-hosts_deny="/etc/hosts.deny"
-denyhosts_files=%w(hosts hosts-restricted hosts-root hosts-valid users-hosts)
+base_path = "/var/lib/denyhosts"
+hosts_deny = "/etc/hosts.deny"
+denyhosts_files = %w(hosts hosts-restricted hosts-root hosts-valid users-hosts)
 
 files=denyhosts_files.map{|file| "#{base_path}/#{file}"}.push hosts_deny
-denyhosts_stop="/etc/init.d/denyhosts stop"
-denyhosts_start="/etc/init.d/denyhosts start"
+denyhosts_stop = "systemctl stop denyhosts.service"
+denyhosts_start = "systemctl start denyhosts.service"
 
-if ARGV.length!= 1
- puts "Wrong number of arguments"
- puts "Usage: denyhosts-remove ip"
+if ARGV.length  != 1
+    puts "Wrong number of arguments"
+    puts "Usage: denyhosts-remove ip"
 else
-
- `#{denyhosts_stop}`
- ip=ARGV[0]
- files.each do |file|
- text=File.read(file)
- if file == hosts_deny
- buffer=text.gsub(/sshd: #{ip}\n/,"")
- else
- buffer=text.gsub(/#{ip}:(.*)\n/,"")
- end
- File.open(file,"w") {|fw| fw.write buffer }
- end
- `#{denyhosts_start}`
+    `#{denyhosts_stop}`
+    
+    ip = ARGV[0]
+    
+    files.each do |file|
+        text=File.read(file)
+    
+        if file == hosts_deny
+            buffer = text.gsub(/sshd: #{ip}\n/, "")
+        else
+            buffer = text.gsub(/#{ip}:(.*)\n/, "")
+        end
+ 
+        File.open(file,"w") {|fw| fw.write buffer }
+    end
+        
+    `#{denyhosts_start}`
 end
-
