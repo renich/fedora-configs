@@ -1,0 +1,3 @@
+This is a distributed virtual host configuration for apache-httpd. 
+
+You should create virtual hosts @ vhost.d. Files should end with a .conf extension.
