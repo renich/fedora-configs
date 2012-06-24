@@ -1,0 +1,1 @@
+Currently, php-fpm is configured to work with nginx. Please, change the owner and group to "apache" or "cherokee" if you plan on using any of those.
