@@ -1,0 +1,38 @@
+#!/bin/bash
+
+for e in dev stag prod; do
+    # definitions
+    short_name='dlptd'
+    long_name='delapatada'
+    host='localhost'
+    author='Renich, The Great'
+    date=$( date +%Y%m%d-%H:%M:%S );
+
+    # generate stuff
+    while read pass; do
+        echo "generating ${long_name}_${e}..."
+        mysql -u root -p -e "\
+            drop user '${short_name}_${e}'@'${host}';
+            create user '${short_name}_${e}'@'${host}' identified by '${pass}'; 
+            
+            drop database if exists \`${long_name}_${e}\`;
+            create database \`${long_name}_${e}\` default character set utf8; 
+            
+            grant all privileges on \`${long_name}_${e}\`.* to '${short_name}_${e}'@'${host}';
+        "
+
+        # Document it
+        cat << EOF > ${long_name}_${e}.mysql
+Generated: ${date}
+by: ${author}
+
+host:       ${host}
+database:   ${long_name}_${e}
+user:       ${short_name}_${e}
+password:   ${pass}
+
+EOF
+    done < <( apg -n 3 -M CLN -m 30 )
+done
+
+exit 0
