@@ -36,3 +36,12 @@ Structure
 As FHS 3 or > as possible: http://www.linuxfoundation.org/collaborate/workgroups/lsb/fhs-30-draft-1
 
 An effort should be made to provide empty directories; which git doesn't follow. I refuse to use empty .gitignore files. If somebody comes up with something, let me know.
+
+Conventions
+===========
+* All example domains should be example.tld.
+* All example users should be user, user1, user2, ...
+* Comment sections should be Capitalized.
+* Comments should use small caps only and CamelCase when relevant.
+* Readme files should be named in upper-case.
+** The exception would be adding a .txt extension when relevant to a web server; in it's DocumentRoot.
