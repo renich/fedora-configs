@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+GIT_WORK_TREE=/var/www/php/example.tld/default/public git checkout -f

@@ -8,3 +8,34 @@ Another idea is to use: GIT_WORK_TREE=/ git checkout -f
 
 If a propper FHS structure is maintained, you will be able to manage a server with this. It will overwrite the followed files. 
 
+Procedure
+=========
+
+#
+## Server
+# create the bare repo in the relevant section
+cd /var/lib/git/deploys/production
+mkdir example.tld.deploy
+cd example.tld.deploy
+git init --bare .
+
+# create the special post-receive hook file
+cat < < EOF > hooks/post-receive
+#!/usr/bin/env bash
+GIT_WORK_TREE=/var/www/php/example.tld/default/public git checkout -f
+EOF
+
+# give it executable permissions
+chmod 700 hooks/post-receive
+
+#
+## Local
+# create a repo (skip if already have one)
+cd /var/www/php/example.tld/default/public
+git init .
+
+# add the deploy remote
+git remote add production.deploy ssh://user@example.tld/var/lib/git/deploys/production/example.tld.deploy
+
+# do your first push
+git push production.deploy master
