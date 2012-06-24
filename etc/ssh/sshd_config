@@ -1,6 +1,6 @@
 # OpenSSH Server config
 # Date:     20120110
-# Author:   Renich Bon Ciric <renich@toolsnet.mx>
+# Author:   Renich Bon Ciric <renich@woralelandia.com>
 
 # Log
 SyslogFacility AUTHPRIV
