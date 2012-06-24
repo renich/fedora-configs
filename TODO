@@ -1,0 +1,9 @@
+- Standardize README files (all to md or rst?)
+    - Define structure
+    - to English
+
+- Cleanup feature branches
+    - Define the best way to do this
+    - Keep them very specific; only relevant files should be created
+
+
