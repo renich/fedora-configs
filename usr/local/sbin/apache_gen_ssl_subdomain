@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+if (( ${#1} < 3 )) || (( ${#2} < 6 )) || [[ -z $3 ]] || [[ ! -f /etc/httpd/vhost.d/live/${d}.conf ]]; then
+    cat <<EOF
+
+Error: Para generar un dominio con SSL, es necesario que ya exista y que aproveas:
+
+    - tipo: el tipo de código usado. Por ejemplo: php, cakephp, codeigniter, zendframework, etc. (3 o más chars)
+    - dominio: un dominio completo. Por ejemplo: ejemplo.com, ejemplo.org, ejemplo.net, etc. (6 o más chars)
+    - subdominio: un subdominio. Por ejemplo: descargas, video, secure, etc. (1 o más chars)
+
+separado por un espacio cada uno.
+
+Ejemplo:
+    
+    [root@web1 ~]# ${0} php ejemplo.com secure
+
+Inténtalo de nuez.
+
+EOF
+    exit 1
+fi
+
+
+while read t d s; do
+   cat <<EOF >> /etc/httpd/vhost.d/live/${d}.conf
+<VirtualHost *:443>
+    SSLEngine on
+    SSLCertificateFile /etc/pki/tls/certs/${d}.crt
+    SSLCertificateKey /etc/pki/tls/private/${d}.key
+    SSLCertificateKey /etc/pki/tls/certs/${d}-chain.crt
+
+    DocumentRoot /var/www/${t}/${d}/${s}
+    ServerName ${s}.${d}
+
+    SSLOptions StrictRequire
+    SSLProtocol all -SSLv2
+
+    
+    <Directory /var/www/${t}/${d}/${s}/>
+        SSLRequireSSL
+        Order Deny,Allow
+        Allow from All
+    </Directory>
+</VirtualHost>
+
+EOF
+
+done < <( echo $1 $2 $3 )
+
+exit 0
