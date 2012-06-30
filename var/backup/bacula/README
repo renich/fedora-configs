@@ -1,0 +1,9 @@
+This directory is where backups are stored.
+
+Tight permission scheme recommended. Something like:
+
+chmod 2710 /var/backup
+chown root:bacula /var/backup
+
+chmod 2770 /var/backup/bacula
+chown root:bacula /var/backup/bacula
