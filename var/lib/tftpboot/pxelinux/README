@@ -1,0 +1,17 @@
+Please, substitute '??' by your fedora release number
+
+Please, put the vmlinuz and initrd.img into a F??-x86_64 directory; on this level. You can find these @ http://download.fedoraproject.org/pub/fedora/linux/releases/??/Fedora/x86_64/os/images/pxeboot/
+
+Also, you need to copy:
+- pxelinux.0
+- splash.xpm.gz
+- vesamenu.c32
+
+find out where to get this files by using:
+    yum provides '*/pxelinux.0'
+    yum provides '*/splash.xpm.gz'
+    yum provides '*/vesamenu.c32'
+
+Put all these files at this level; specifically: /var/lib/tftpboot/pxelinux
+
+Also, you will have to fix the pxelinux.cfg/default file. 

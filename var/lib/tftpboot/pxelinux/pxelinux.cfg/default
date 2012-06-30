@@ -1,0 +1,21 @@
+default vesamenu.c32
+prompt 0
+timeout 70
+
+label fedora??
+    menu label Install Fedora ?? host software
+    kernel F??-x86_64/vmlinuz
+    IPAPPEND 2
+    append initrd=F??-x86_64/initrd.img inst.repo=http://repo.example.tld/fedora/linux/releases/??/Fedora/x86_64/os ks=http://repo.example.tld/ks/fedora??.ks ksdevice=p5p1
+label fedora??-rescue
+    menu label Rescue Fedora ?? installed system
+    kernel F??-x86_64/vmlinuz
+    IPAPPEND 2
+    append initrd=F??-x86_64/initrd.img rescue ksdevice=p5p1
+label memtest86
+    menu label Memory test
+    kernel F??-x86_64/memtest
+    append -
+label local
+    menu label Boot from local drive
+    localboot 0xffff
