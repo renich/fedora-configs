@@ -1,0 +1,2 @@
+zone "example.tld" IN { type master; file "masters/example.tld.db"; };
+

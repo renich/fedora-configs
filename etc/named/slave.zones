@@ -1,0 +1,1 @@
+zone "example.tld" IN { type slave; file "slaves/example.tld.db"; masters { 123.123.123.123; }; };
