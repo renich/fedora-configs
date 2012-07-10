@@ -1,0 +1,53 @@
+;
+; SOA
+$ORIGIN  example.tld.
+$TTL 1d
+@   IN  SOA ns1.example.tld.    root.example.tld. (
+            2012000000  ; serial
+            20m         ; refresh:  time in which slave tries to refresh. 1200 (20 minutes) - 43200 (12 hours)
+            3m          ; retry:    time between retries in case slave fails to refresh. 180 (3 minutes) - 900 (15 minutes)
+            3w          ; expire:   indicates when the zone data is no longer authritative. 1209600 (2 weeks) - 2419200 (4 weeks)
+            5m          ; minimum   negative caching time . 0 - 10800 (3 hours)
+);
+
+;
+;; NS
+                    IN  NS      ns1.example.tld.
+                    IN  NS      ns2.example.tld.
+
+;
+;; MX
+                    IN  MX  10  mail1.example.tld.
+;                    IN  MX  1   aspmx.l.google.com.
+;                    IN  MX  5   alt1.aspmx.l.google.com.
+;                    IN  MX  5   alt2.aspmx.l.google.com.
+;                    IN  MX  10  aspmx2.googlemail.com.
+;                    IN  MX  10  aspmx3.googlemail.com.
+
+;
+;; A
+@                   IN  A       123.123.123.123
+*                   IN  A       123.123.123.123
+ns1                 IN  A       123.123.123.254
+ns2                 IN  A       123.123.123.127
+
+;
+;; AAAA
+
+;
+;; CNAME
+;calendar            IN  CNAME   ghs.google.com.
+;docs                IN  CNAME   ghs.google.com.
+;mail                IN  CNAME   ghs.google.com.
+;sites               IN  CNAME   ghs.google.com.
+;start               IN  CNAME   ghs.google.com.
+
+;
+;; SRV
+
+;
+;; TXT
+@                    IN  TXT    "v=spf1 mx ip4:123.123.123.123 ~all"
+;@                    IN  TXT    "v=spf1 mx ip4:123.123.123.123 include:_spf.google.com ~all"
+;@                    IN  TXT    "google-site-verification="
+;google._domainkey    IN  TXT    "v=DKIM1; k=rsa; p="
