@@ -6,7 +6,7 @@ label fedora??
     menu label Install Fedora ??
     kernel F??-x86_64/vmlinuz
     IPAPPEND 2
-    append initrd=F??-x86_64/initrd.img inst.repo=http://repo.example.tld/fedora/linux/releases/??/Fedora/x86_64/os ks=http://repo.example.tld/ks/fedora??.ks ksdevice=p5p1
+    append initrd=F??-x86_64/initrd.img inst.repo=http://repo.example.tld/fedora/linux/releases/??/Fedora/x86_64/os ks=http://repo.example.tld/fedora/ks/fedora??.ks ksdevice=p5p1
 label fedora??-rescue
     menu label Rescue Fedora ??
     kernel F??-x86_64/vmlinuz
