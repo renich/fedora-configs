@@ -1,5 +1,5 @@
 # OpenSSH Server config
-# Date:     20120110
+# Date:     20120815
 # Author:   Renich Bon Ciric <renich@woralelandia.com>
 
 # Log
@@ -23,7 +23,7 @@ AcceptEnv XMODIFIERS
 X11Forwarding no
 
 # sFTP
-Subsystem   sftp    /usr/libexec/openssh/sftp-server
+Subsystem   sftp    /usr/libexec/openssh/sftp-server -u 002
 
 AllowUsers renich root
 PermitRootLogin without-password
