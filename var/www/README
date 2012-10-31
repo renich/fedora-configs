@@ -1,0 +1,5 @@
+Description
+===========
+We are separating the directories by "type" or "app" if you like.
+
+This makes it easier to generalize configuration for specific use cases.
