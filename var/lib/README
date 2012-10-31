@@ -1,0 +1,3 @@
+The git directory should have 2770 permissions. Create a group called 'gitters' or something like it to add users that can use the repos to that group.
+
+Make sure that the group owns the directory.
