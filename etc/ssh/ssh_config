@@ -8,4 +8,4 @@ Host *
 	SendEnv LC_IDENTIFICATION LC_ALL LANGUAGE
 	SendEnv XMODIFIERS
 
-PreferredAuthentications publickey
+PreferredAuthentications publickey password
