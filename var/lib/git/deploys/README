@@ -26,7 +26,7 @@ GIT_WORK_TREE=/var/www/php/example.tld/default/public git checkout -f
 EOF
 
 # give it executable permissions
-chmod 700 hooks/post-receive
+chmod 770 hooks/post-receive
 
 #
 ## Local
