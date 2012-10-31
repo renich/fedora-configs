@@ -25,13 +25,13 @@ X11Forwarding no
 # sFTP
 Subsystem   sftp    /usr/libexec/openssh/sftp-server -u 002
 
-AllowUsers renich root
+AllowUsers root user user1 user2
 PermitRootLogin without-password
 
-Match User renich
+Match User user
 PubkeyAuthentication yes
 PasswordAuthentication yes
 
-Match User root
+Match User root,user1,user2
 PubkeyAuthentication yes
 PasswordAuthentication no
