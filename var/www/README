@@ -1,5 +1,16 @@
 Description
 ===========
-We are separating the directories by "type" or "app" if you like.
+I am separating the directories by "type" or "app" if you like.
 
 This makes it easier to generalize configuration for specific use cases.
+
+Directory structure
+===================
+Every "app" or "type" has it's own directory plus a 'default/public'. The DocumentRoot goes in "public".
+"Default" is only a container for all the stuff required under the document root; for example; the application layer, design files, notes, etc.
+
+On the other hand, if we have a domain and it's a simple php website, you should create the 'domain.tld' inside the "php" directory; followed by it's own 'default/public'. This way, you can ensure you have a container for the default domain.
+
+In case you need a subdomain for the domain, just create 'subdomain/public' inside 'domain.tld' and you're done.
+
+The automatic configuration on NginX should take care of finding the document root for you.
