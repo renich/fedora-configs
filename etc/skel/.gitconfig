@@ -1,0 +1,10 @@
+[color]
+        ui = auto
+        status = auto
+        branch = auto
+        interactive = auto
+        diff = auto
+[core]
+        editor = vim
+[mergetool]
+        keepbackup = false
