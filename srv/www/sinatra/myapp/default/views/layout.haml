@@ -1,0 +1,26 @@
+!!! 5
+%html{:xmlns => "http://www.w3.org/1999/xhtml", "xml:lang" => "en", :lang => "en"}
+  %head
+    / Metadata
+    %meta(name="author" content="Renich Bon Ciric")/
+    
+    / Title
+    %title= @title
+
+    / CSS
+    
+    / JS
+
+  / Body
+  %body{id:@action}
+    / Header
+    %header
+      %h1#title= @title
+    
+    / Content
+    #content= yield
+    
+    / Footer
+    %footer
+      %small= '2013 | HTML5 | CSS3'
+      %address= 'EVALinux'

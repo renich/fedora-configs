@@ -1,0 +1,14 @@
+>> Writing PID to tmp/pids/thin-myapp.pid
+>> Using rack adapter
+        SECURITY WARNING: No secret option provided to Rack::Session::Cookie.
+        This poses a security threat. It is strongly recommended that you
+        provide a secret to prevent exploits that may be possible from crafted
+        cookies. This will not be supported in future versions of Rack, and
+        future versions will even invalidate your existing user cookies.
+
+        Called from: /home/renich/.gem/ruby/1.9.1/gems/rack-1.5.2/lib/rack/builder.rb:86:in `new'.
+
+>> Thin web server (v1.5.0 codename Knife)
+>> Maximum connections set to 1024
+>> Listening on /run/thin/myapp.sock, CTRL+C to stop
+>> Exiting!

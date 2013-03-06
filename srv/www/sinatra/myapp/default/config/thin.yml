@@ -1,0 +1,12 @@
+---
+chdir: /srv/www/sinatra/myapp/default
+environment: production
+timeout: 30
+log: logs/thin-myapp.log
+pid: tmp/pids/thin-myapp.pid
+max_conns: 1024
+max_persistent_conns: 100
+require: []
+wait: 30
+socket: /run/thin/myapp.sock
+daemonize: true
