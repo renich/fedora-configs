@@ -1,0 +1,11 @@
+Thin
+====
+
+You need to create a thin user or a myapp user.
+
+The thin user will run your ruby app. It will write the sock file to /run/thin.
+
+The convention to follow for the sock name is: <hostname>.sock. 
+For example: www.myapp.com.sock
+
+You can include a redirect in your nginx app to guarantee that the user accesses www.myapp.com all the time.
