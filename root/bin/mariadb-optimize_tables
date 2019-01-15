@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+for db in $(echo "SHOW DATABASES;" | mysql $MYSQL_LOGIN | grep -v -e "Database" -e "information_schema"); do
+    TABLES=$(echo "USE $db; SHOW TABLES;" | mysql $MYSQL_LOGIN |  grep -v Tables_in_)
+
+    echo
+    echo "############### Switching to database $db ###############"
+
+    if [[ "${db}" != 'performance_schema' ]]; then
+        for table in $TABLES; do
+                echo -n " * Optimizing table ${db}.${table}... "
+                mysql -u root -e "ANALYZE TABLE \`${table}\`" ${db} > /dev/null
+                mysql -u root -e "CHECK TABLE \`${table}\` FAST QUICK EXTENDED" ${db} > /dev/null
+                mysql -u root -e "REPAIR TABLE \`${table}\` EXTENDED" ${db} > /dev/null
+                mysql -u root -e "OPTIMIZE TABLE \`${table}\`" ${db} > /dev/null
+                echo "done."
+        done
+    fi
+done
